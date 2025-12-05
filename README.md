@@ -1,50 +1,139 @@
-# EvolphinX
+<p align="center">
+  <img src="https://img.shields.io/badge/Turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white" alt="Turborepo"/>
+  <img src="https://img.shields.io/badge/Next.js%2016-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/React%2019-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/>
+  <img src="https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"/>
+</p>
 
-A modern, production-ready monorepo built with **Turborepo**, **Next.js 15**, **React 19**, **Tailwind CSS**, and **shadcn/ui**.
+<h1 align="center">🚀 EvolphinX</h1>
+
+<p align="center">
+  <strong>A modern, production-ready monorepo built for scalable web applications</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Evolphin-Software/evolphinX/actions/workflows/ci.yml"><img src="https://github.com/Evolphin-Software/evolphinX/actions/workflows/ci.yml/badge.svg" alt="CI Status"/></a>
+  <img src="https://img.shields.io/badge/Node.js-%3E%3D20-brightgreen?style=flat-square" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/pnpm-9.14.2-orange?style=flat-square" alt="pnpm"/>
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"/>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Evolphin-Software/evolphinX/wiki">📚 Documentation</a> •
+  <a href="https://github.com/Evolphin-Software/evolphinX/wiki/Getting-Started">🚀 Getting Started</a> •
+  <a href="https://github.com/Evolphin-Software/evolphinX/wiki/Contributing">🤝 Contributing</a>
+</p>
+
+---
+
+## ✨ Features
+
+| Feature                      | Description                                                           |
+| ---------------------------- | --------------------------------------------------------------------- |
+| 🏗️ **Monorepo Architecture** | Powered by Turborepo for blazing-fast builds with intelligent caching |
+| ⚡ **Latest Stack**          | Next.js 16, React 19, TypeScript 5.9                                  |
+| 🎨 **Modern UI**             | shadcn/ui components built on Radix UI + Tailwind CSS                 |
+| 🧪 **Testing Ready**         | Vitest + React Testing Library configured out of the box              |
+| 🔄 **State Management**      | TanStack Query (server) + Zustand (client)                            |
+| 📝 **Form Handling**         | React Hook Form + Zod validation                                      |
+| 🔒 **Code Quality**          | ESLint, Prettier, Husky, Commitlint                                   |
+| 🚀 **CI/CD**                 | GitHub Actions workflow ready to deploy                               |
+
+---
+
+## 🏛️ Architecture
+
+```mermaid
+graph TB
+    subgraph "📦 Applications"
+        WEB["🌐 Web App<br/><small>Next.js 16 • Port 3000</small>"]
+        DOCS["📚 Docs<br/><small>Next.js 16 • Port 3001</small>"]
+    end
+
+    subgraph "📚 Shared Packages"
+        UI["🎨 @repo/ui<br/><small>Button • Card • Input</small>"]
+        TAILWIND["🎭 @repo/tailwind-config"]
+        ESLINT["📏 @repo/eslint-config"]
+        TS["📘 @repo/typescript-config"]
+    end
+
+    subgraph "🛠️ Build System"
+        TURBO["⚡ Turborepo"]
+        PNPM["📦 pnpm Workspaces"]
+    end
+
+    WEB --> UI
+    WEB --> TAILWIND
+    DOCS --> UI
+    TURBO --> WEB
+    TURBO --> DOCS
+    PNPM --> TURBO
+
+    style WEB fill:#0070f3,color:#fff
+    style DOCS fill:#10b981,color:#fff
+    style UI fill:#8b5cf6,color:#fff
+    style TURBO fill:#ef4444,color:#fff
+```
+
+---
 
 ## 🚀 Tech Stack
 
-| Category             | Technology                                |
-| -------------------- | ----------------------------------------- |
-| **Monorepo**         | Turborepo                                 |
-| **Package Manager**  | pnpm                                      |
-| **Frontend**         | Next.js 15, React 19                      |
-| **Styling**          | Tailwind CSS                              |
-| **UI Components**    | shadcn/ui (Radix UI)                      |
-| **State Management** | Zustand (client), TanStack Query (server) |
-| **Forms**            | React Hook Form + Zod                     |
-| **Testing**          | Vitest, React Testing Library             |
-| **Linting**          | ESLint, Prettier                          |
-| **Git Hooks**        | Husky, lint-staged, commitlint            |
-| **CI/CD**            | GitHub Actions                            |
+| Category            | Technology                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| **Monorepo**        | [Turborepo](https://turbo.build/)                                                     |
+| **Package Manager** | [pnpm](https://pnpm.io/) 9.x                                                          |
+| **Frontend**        | [Next.js](https://nextjs.org/) 16 + [React](https://react.dev/) 19                    |
+| **Language**        | [TypeScript](https://www.typescriptlang.org/) 5.9                                     |
+| **Styling**         | [Tailwind CSS](https://tailwindcss.com/)                                              |
+| **UI Components**   | [shadcn/ui](https://ui.shadcn.com/) (Radix UI)                                        |
+| **State (Server)**  | [TanStack Query](https://tanstack.com/query)                                          |
+| **State (Client)**  | [Zustand](https://zustand-demo.pmnd.rs/)                                              |
+| **Forms**           | [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)             |
+| **Testing**         | [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/) |
+| **Linting**         | [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)                      |
+| **Git Hooks**       | [Husky](https://typicode.github.io/husky/) + [Commitlint](https://commitlint.js.org/) |
+| **CI/CD**           | [GitHub Actions](https://github.com/features/actions)                                 |
+
+---
 
 ## 📁 Project Structure
 
 ```
 evolphinX/
-├── apps/
-│   ├── web/                  # Main Next.js application
-│   └── docs/                 # Documentation site
-├── packages/
-│   ├── ui/                   # Shared UI components (shadcn/ui)
-│   ├── config-tailwind/      # Shared Tailwind configuration
-│   ├── eslint-config/        # Shared ESLint configuration
-│   └── typescript-config/    # Shared TypeScript configuration
-└── ...
+├── 📁 apps/
+│   ├── 🌐 web/                  # Main Next.js application
+│   │   ├── app/                 # App Router pages
+│   │   ├── components/          # App-specific components
+│   │   ├── lib/                 # Utilities
+│   │   └── __tests__/           # Tests
+│   └── 📚 docs/                 # Documentation site
+├── 📁 packages/
+│   ├── 🎨 ui/                   # Shared UI components (shadcn/ui)
+│   ├── 🎭 config-tailwind/      # Shared Tailwind configuration
+│   ├── 📏 eslint-config/        # Shared ESLint configuration
+│   └── 📘 typescript-config/    # Shared TypeScript configuration
+├── 📄 turbo.json                # Turborepo configuration
+├── 📄 pnpm-workspace.yaml       # Workspace definition
+└── 📄 package.json              # Root package
 ```
+
+---
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
 
-- Node.js >= 20
-- pnpm >= 9
+- **Node.js** ≥ 20
+- **pnpm** ≥ 9
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/Evolphin-Software/evolphinX.git
 cd evolphinX
 
 # Install dependencies
@@ -61,6 +150,9 @@ pnpm dev
 pnpm dev --filter web
 ```
 
+🌐 **Web App**: [http://localhost:3000](http://localhost:3000)
+📚 **Docs**: [http://localhost:3001](http://localhost:3001)
+
 ### Build
 
 ```bash
@@ -68,106 +160,125 @@ pnpm dev --filter web
 pnpm build
 ```
 
-### Testing
-
-```bash
-# Run all tests
-pnpm test
-
-# Run tests in watch mode
-pnpm test:watch
-
-# Run tests with coverage
-pnpm test:coverage
-```
-
-### Linting & Formatting
-
-```bash
-# Lint all packages
-pnpm lint
-
-# Fix lint issues
-pnpm lint:fix
-
-# Format code
-pnpm format
-
-# Check formatting
-pnpm format:check
-```
+---
 
 ## 📦 Available Scripts
 
-| Script             | Description                 |
-| ------------------ | --------------------------- |
-| `pnpm dev`         | Start development servers   |
-| `pnpm build`       | Build all apps and packages |
-| `pnpm lint`        | Run ESLint                  |
-| `pnpm format`      | Format code with Prettier   |
-| `pnpm test`        | Run tests                   |
-| `pnpm check-types` | Type check all packages     |
-| `pnpm clean`       | Clean build artifacts       |
+| Script               | Description                    |
+| -------------------- | ------------------------------ |
+| `pnpm dev`           | 🚀 Start development servers   |
+| `pnpm build`         | 📦 Build all apps and packages |
+| `pnpm lint`          | 🔍 Run ESLint                  |
+| `pnpm lint:fix`      | 🔧 Fix lint issues             |
+| `pnpm format`        | 💅 Format code with Prettier   |
+| `pnpm format:check`  | ✅ Check formatting            |
+| `pnpm test`          | 🧪 Run tests                   |
+| `pnpm test:watch`    | 👀 Run tests in watch mode     |
+| `pnpm test:coverage` | 📊 Generate coverage report    |
+| `pnpm check-types`   | 📝 Type check all packages     |
+| `pnpm clean`         | 🧹 Clean build artifacts       |
+
+---
 
 ## 🎨 UI Components
 
-Components are located in `packages/ui` and can be imported in apps:
+Import components from the shared UI package:
 
 ```tsx
-import { Button, Card, Input } from "@repo/ui";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  Input,
+} from "@repo/ui";
+
+export default function Example() {
+  return (
+    <Card className="w-96">
+      <CardHeader>
+        <CardTitle>Welcome! 👋</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Input placeholder="Enter your name" />
+        <Button>Get Started</Button>
+      </CardContent>
+    </Card>
+  );
+}
 ```
 
-To add new shadcn/ui components, manually add them to `packages/ui/src/components/`.
+See the [Components documentation](https://github.com/Evolphin-Software/evolphinX/wiki/Components) for more details.
 
-## 🔧 Configuration
-
-### Environment Variables
-
-Create `.env.local` in `apps/web/`:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8080
-```
-
-### Tailwind CSS
-
-Tailwind configuration is shared via `@repo/tailwind-config`. Customize the theme in `packages/config-tailwind/tailwind.config.ts`.
+---
 
 ## 📝 Commit Convention
 
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+This project uses [Conventional Commits](https://www.conventionalcommits.org/):
 
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `docs:` - Documentation changes
-- `style:` - Formatting changes
-- `refactor:` - Code refactoring
-- `test:` - Add or update tests
-- `chore:` - Maintenance tasks
+| Type       | Description         |
+| ---------- | ------------------- |
+| `feat`     | ✨ New feature      |
+| `fix`      | 🐛 Bug fix          |
+| `docs`     | 📝 Documentation    |
+| `style`    | 💄 Formatting       |
+| `refactor` | ♻️ Code restructure |
+| `test`     | ✅ Tests            |
+| `chore`    | 🔧 Maintenance      |
+
+```bash
+git commit -m "feat(ui): add new Checkbox component"
+```
+
+---
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
 
 1. Push to GitHub
-2. Import project to Vercel
+2. Import project to [Vercel](https://vercel.com)
 3. Set root directory to `apps/web`
-4. Deploy
+4. Deploy! 🎉
 
 ### Enable Remote Caching
 
 ```bash
-pnpm dlx turbo login
-pnpm dlx turbo link
+npx turbo login
+npx turbo link
 ```
 
-## 📚 Learn More
+---
 
-- [Turborepo Documentation](https://turborepo.com/docs)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [shadcn/ui Documentation](https://ui.shadcn.com)
+## 📚 Documentation
+
+Visit our [Wiki](https://github.com/Evolphin-Software/evolphinX/wiki) for comprehensive documentation:
+
+| Page                                                                                          | Description            |
+| --------------------------------------------------------------------------------------------- | ---------------------- |
+| [🏠 Home](https://github.com/Evolphin-Software/evolphinX/wiki)                                | Overview & quick start |
+| [🚀 Getting Started](https://github.com/Evolphin-Software/evolphinX/wiki/Getting-Started)     | Installation guide     |
+| [🏛️ Architecture](https://github.com/Evolphin-Software/evolphinX/wiki/Architecture)           | Project structure      |
+| [🎨 Components](https://github.com/Evolphin-Software/evolphinX/wiki/Components)               | UI library reference   |
+| [🛠️ Development Guide](https://github.com/Evolphin-Software/evolphinX/wiki/Development-Guide) | Best practices         |
+| [🤝 Contributing](https://github.com/Evolphin-Software/evolphinX/wiki/Contributing)           | Contribution guide     |
+| [📡 API Reference](https://github.com/Evolphin-Software/evolphinX/wiki/API-Reference)         | API documentation      |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](https://github.com/Evolphin-Software/evolphinX/wiki/Contributing) before submitting a Pull Request.
+
+---
 
 ## 📄 License
 
-MIT
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<p align="center">
+  Made with ❤️ by <strong>Evolphin Software</strong>
+</p>
