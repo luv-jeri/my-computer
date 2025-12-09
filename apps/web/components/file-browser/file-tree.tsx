@@ -124,7 +124,7 @@ const FileTreeNode = ({
               className={cn(
                 "h-4 w-4 shrink-0",
                 isFolder
-                  ? "fill-blue-500/20 text-blue-500"
+                  ? "fill-primary/20 text-primary"
                   : "text-muted-foreground"
               )}
             />
