@@ -49,11 +49,10 @@
 graph TB
     subgraph "📦 Applications"
         WEB["🌐 Web App<br/><small>Next.js 16 • Port 3000</small>"]
-        DOCS["📚 Docs<br/><small>Next.js 16 • Port 3001</small>"]
     end
 
     subgraph "📚 Shared Packages"
-        UI["🎨 @repo/ui<br/><small>Button • Card • Input</small>"]
+        UI["🎨 @repo/ui<br/><small>shadcn/ui Components</small>"]
         TAILWIND["🎭 @repo/tailwind-config"]
         ESLINT["📏 @repo/eslint-config"]
         TS["📘 @repo/typescript-config"]
@@ -66,13 +65,10 @@ graph TB
 
     WEB --> UI
     WEB --> TAILWIND
-    DOCS --> UI
     TURBO --> WEB
-    TURBO --> DOCS
     PNPM --> TURBO
 
     style WEB fill:#0070f3,color:#fff
-    style DOCS fill:#10b981,color:#fff
     style UI fill:#8b5cf6,color:#fff
     style TURBO fill:#ef4444,color:#fff
 ```
@@ -104,14 +100,13 @@ graph TB
 ```
 surfaceX/
 ├── 📁 apps/
-│   ├── 🌐 web/                  # Main Next.js application
-│   │   ├── app/                 # App Router pages
-│   │   ├── components/          # App-specific components
-│   │   ├── lib/                 # Utilities
-│   │   └── __tests__/           # Tests
-│   └── 📚 docs/                 # Documentation site
+│   └── 🌐 web/                  # Main Next.js application
+│       ├── app/                 # App Router pages
+│       ├── components/          # App-specific components
+│       ├── lib/                 # Utilities
+│       └── __tests__/           # Tests
 ├── 📁 packages/
-│   ├── 🎨 ui/                   # Shared UI components (shadcn/ui)
+│   ├── 🎨 ui/                   # Shared shadcn/ui components
 │   ├── 🎭 config-tailwind/      # Shared Tailwind configuration
 │   ├── 📏 eslint-config/        # Shared ESLint configuration
 │   └── 📘 typescript-config/    # Shared TypeScript configuration
@@ -151,7 +146,6 @@ pnpm dev --filter web
 ```
 
 🌐 **Web App**: [http://localhost:3000](http://localhost:3000)
-📚 **Docs**: [http://localhost:3001](http://localhost:3001)
 
 ### Build
 
@@ -208,6 +202,21 @@ export default function Example() {
   );
 }
 ```
+
+### Adding New Components
+
+Use the shadcn CLI to add new components:
+
+```bash
+cd apps/web
+pnpm dlx shadcn@latest add [COMPONENT]
+
+# Examples:
+pnpm dlx shadcn@latest add dialog
+pnpm dlx shadcn@latest add dropdown-menu
+```
+
+The CLI will install components to `packages/ui/src/components/` automatically.
 
 See the [Components documentation](https://github.com/Evolphin-Software/surfaceX/wiki/Components) for more details.
 
