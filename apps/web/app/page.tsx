@@ -1,11 +1,27 @@
+"use client";
+
 import { AppShell } from "@/components/layout/app-shell";
 import { SearchInput } from "@/components/search/search-input";
 import { Button } from "@repo/ui";
-import { ImageIcon, FileText, Clock, Star } from "lucide-react";
-import { mockAssets, mockRecentSearches } from "@/lib/mock-data";
+import { Clock, Star, MessageSquare, Plus } from "lucide-react";
+import { mockAssets } from "@/lib/mock-data";
 import Image from "next/image";
+import { useSearchConversationStore } from "@/lib/stores/search-conversation-store";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 export default function HomePage() {
+  const router = useRouter();
+  const { history, loadSession } = useSearchConversationStore();
+
+  const handleRestoreSession = useCallback(
+    (sessionId: string) => {
+      loadSession(sessionId);
+      router.push("/search");
+    },
+    [loadSession, router]
+  );
+
   return (
     <AppShell>
       <div className="relative flex h-full flex-1 flex-col items-center justify-center overflow-hidden p-4 md:p-6">
@@ -85,18 +101,29 @@ export default function HomePage() {
               </div>
             </DashboardCard>
 
-            {/* 3. Recent Searches / Quick Actions */}
-            <DashboardCard title="Recent Searches" icon={FileText}>
+            {/* 3. Recent Chats (Restorable) */}
+            <DashboardCard title="Recent Chats" icon={MessageSquare}>
               <div className="flex h-full flex-col gap-2">
-                <div className="flex flex-wrap gap-1.5">
-                  {mockRecentSearches.slice(0, 6).map((search) => (
-                    <span
-                      key={search.id}
-                      className="bg-muted/30 text-muted-foreground hover:bg-muted hover:border-border max-w-[120px] cursor-pointer truncate rounded-md border border-transparent px-1.5 py-0.5 text-[10px] transition-colors"
-                      title={search.query}
+                <div className="flex flex-col gap-1.5">
+                  {history.slice(0, 3).map((session) => (
+                    <button
+                      type="button"
+                      key={session.id}
+                      onClick={() => handleRestoreSession(session.id)}
+                      className="group/item hover:bg-muted/50 flex w-full flex-col items-start gap-0.5 rounded-md p-1.5 text-left transition-colors"
                     >
-                      {search.query}
-                    </span>
+                      <div className="flex w-full items-center justify-between">
+                        <span className="group-hover/item:text-primary truncate text-[10px] font-medium transition-colors">
+                          {session.title}
+                        </span>
+                        <span className="text-muted-foreground text-[9px]">
+                          {new Date(session.date).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <span className="text-muted-foreground line-clamp-1 w-full text-[9px]">
+                        {session.preview}
+                      </span>
+                    </button>
                   ))}
                 </div>
                 <div className="border-border/50 mt-auto flex gap-2 border-t border-dashed pt-2">
@@ -104,15 +131,9 @@ export default function HomePage() {
                     variant="ghost"
                     size="sm"
                     className="h-6 w-full justify-start px-2 text-[10px]"
+                    onClick={() => router.push("/search")}
                   >
-                    <ImageIcon className="mr-1.5 h-3 w-3" /> Upload
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-6 w-full justify-start px-2 text-[10px]"
-                  >
-                    <Clock className="mr-1.5 h-3 w-3" /> History
+                    <Plus className="mr-1.5 h-3 w-3" /> New Chat
                   </Button>
                 </div>
               </div>

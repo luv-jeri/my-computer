@@ -100,7 +100,7 @@ export const useSearchConversationStore = create<SearchConversationState>(
     setChatMode: (mode) => set({ chatMode: mode }),
     setModelPreset: (preset) => set({ modelPreset: preset }),
 
-    startConversation: (initialQuery) => {
+    startConversation: (initialQuery, mode, results) => {
       // Save current session to history if it has messages
       const state = get();
       if (state.messages.length > 0 && state.activeSessionId) {
@@ -118,6 +118,35 @@ export const useSearchConversationStore = create<SearchConversationState>(
             },
           ]
         : [];
+
+      // Add AI Response if we have results
+      if (initialQuery && results && results.length > 0) {
+        const total = results.length;
+        const images = results.filter((r) => r.type === "image").length;
+        const videos = results.filter((r) => r.type === "video").length;
+        const docs = results.filter((r) => r.type === "document").length;
+
+        const parts = [];
+        if (images) parts.push(`${images} image${images > 1 ? "s" : ""}`);
+        if (videos) parts.push(`${videos} video${videos > 1 ? "s" : ""}`);
+        if (docs) parts.push(`${docs} document${docs > 1 ? "s" : ""}`);
+
+        const typeSummary = parts.length > 0 ? ` (${parts.join(", ")})` : "";
+
+        initialMessages.push({
+          id: (Date.now() + 1).toString(),
+          type: "assistant",
+          content: `Got it! I found ${total} file${total > 1 ? "s" : ""} matching your search${typeSummary}. How would you like to filter or analyze them?`,
+          timestamp: new Date(Date.now() + 500), // Slight delay for realism
+        });
+      } else if (initialQuery) {
+        initialMessages.push({
+          id: (Date.now() + 1).toString(),
+          type: "assistant", // Fallback if no results passed
+          content: `I've started a search for "${initialQuery}". I'm looking for matching files now...`,
+          timestamp: new Date(Date.now() + 500),
+        });
+      }
 
       set({
         isActive: true,
