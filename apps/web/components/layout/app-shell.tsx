@@ -116,8 +116,35 @@ export function AppShell({ children }: AppShellProps) {
 
             <div className="bg-border ml-4 h-4 w-px" />
 
-            {/* Dynamic Breadcrumbs */}
-            <DynamicBreadcrumbs />
+            {/* Main Navigation */}
+            <nav className="mx-2 flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs font-medium"
+              >
+                <Link href="/assets">Assets</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs font-medium"
+              >
+                <Link href="/collections">Collections</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs font-medium"
+              >
+                <Link href="/explore">Explore</Link>
+              </Button>
+            </nav>
+
+            <div className="bg-border mr-2 h-4 w-px" />
           </div>
 
           {/* Advanced Search Bar - Full Width (not on home page) */}
@@ -308,10 +335,11 @@ export function AppShell({ children }: AppShellProps) {
                 {/* Content Toolbar */}
                 <div className="bg-background/95 supports-[backdrop-filter]:bg-background/60 flex h-10 items-center justify-between border-b px-4 backdrop-blur">
                   <div className="flex items-center gap-1">
-                    {/* View mode buttons removed - now handled per-page */}
+                    {/* Dynamic Breadcrumbs */}
+                    <DynamicBreadcrumbs />
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between gap-2">
                     <div className="bg-border mx-1 h-3 w-px" />
                     <Button
                       variant="ghost"

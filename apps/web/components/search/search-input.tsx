@@ -138,14 +138,14 @@ export function SearchInput({
           <div
             className={cn(
               "relative flex items-center transition-all duration-200",
-              // Hero Styles: Clean, Minimal, Deep Shadow
+              // Hero Styles: Prominent, High Contrast
               isHero
-                ? "bg-background h-14 rounded-full border px-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+                ? "bg-background border-primary/20 hover:border-primary/40 h-14 rounded-full border-2 px-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.16)]"
                 : "h-10 rounded-md border px-3",
 
               // Interactions
               isHero && isFocused
-                ? "ring-primary/10 border-primary/20 ring-2"
+                ? "border-primary ring-primary/10 ring-4"
                 : "border-border/50",
               !isHero && isFocused
                 ? "border-primary/50 ring-primary/20 ring-2"
@@ -155,8 +155,8 @@ export function SearchInput({
             {/* Search Icon */}
             <div
               className={cn(
-                "text-muted-foreground flex-shrink-0",
-                isHero ? "mr-4" : "mr-2"
+                "flex-shrink-0",
+                isHero ? "text-primary mr-4" : "text-muted-foreground mr-2"
               )}
             >
               {isLoading ? (
@@ -165,7 +165,7 @@ export function SearchInput({
                 <Search
                   className={cn(
                     "transition-colors",
-                    isHero ? "h-5 w-5" : "h-4 w-4",
+                    isHero ? "h-6 w-6" : "h-4 w-4",
                     isFocused && "text-primary"
                   )}
                 />
