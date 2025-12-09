@@ -6,7 +6,6 @@
     "formulahendry.auto-rename-tag",
     "christian-kohler.path-intellisense",
     "mikestead.dotenv",
-    "yoavbls.pretty-ts-errors",
-    "prisma.prisma"
+    "yoavbls.pretty-ts-errors"
   ]
 }
