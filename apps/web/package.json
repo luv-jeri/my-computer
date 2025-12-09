@@ -11,7 +11,8 @@
     "check-types": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "ui:add": "pnpm dlx shadcn@latest add"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
