@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"/>
 </p>
 
-<h1 align="center">🚀 surfaceX</h1>
+<h1 align="center">🚀 SurfaceX</h1>
 
 <p align="center">
   <strong>A modern, production-ready monorepo built for scalable web applications</strong>
