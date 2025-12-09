@@ -1,5 +1,5 @@
 {
-  "name": "evolphinx",
+  "name": "surfacex",
   "private": true,
   "scripts": {
     "build": "turbo run build",

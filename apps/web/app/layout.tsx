@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EvolphinX",
-  description: "EvolphinX - Modern Web Application",
+  title: "SurfaceX",
+  description: "SurfaceX - Modern Web Application",
 };
 
 export default function RootLayout({

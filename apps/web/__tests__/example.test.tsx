@@ -8,8 +8,8 @@ function Greeting({ name }: { name: string }) {
 
 describe("Example Test Suite", () => {
   it("should render greeting correctly", () => {
-    render(<Greeting name="EvolphinX" />);
-    expect(screen.getByText("Hello, EvolphinX!")).toBeInTheDocument();
+    render(<Greeting name="surfaceX" />);
+    expect(screen.getByText("Hello, surfaceX!")).toBeInTheDocument();
   });
 
   it("should pass basic assertion", () => {

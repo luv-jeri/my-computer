@@ -17,7 +17,7 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bg-primary h-8 w-8 rounded-lg" />
-            <span className="text-xl font-bold">EvolphinX</span>
+            <span className="text-xl font-bold">SurfaceX</span>
           </div>
           <nav className="flex items-center gap-4">
             <Button variant="ghost">Documentation</Button>
@@ -32,7 +32,7 @@ export default function Home() {
         {/* Hero */}
         <section className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Welcome to <span className="text-primary">EvolphinX</span>
+            Welcome to <span className="text-primary">SurfaceX</span>
           </h1>
           <p className="text-muted-foreground mt-6 text-lg">
             A modern, scalable monorepo built with Turborepo, Next.js, Tailwind

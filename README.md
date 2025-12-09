@@ -7,23 +7,23 @@
   <img src="https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"/>
 </p>
 
-<h1 align="center">🚀 EvolphinX</h1>
+<h1 align="center">🚀 surfaceX</h1>
 
 <p align="center">
   <strong>A modern, production-ready monorepo built for scalable web applications</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Evolphin-Software/evolphinX/actions/workflows/ci.yml"><img src="https://github.com/Evolphin-Software/evolphinX/actions/workflows/ci.yml/badge.svg" alt="CI Status"/></a>
+  <a href="https://github.com/Evolphin-Software/surfaceX/actions/workflows/ci.yml"><img src="https://github.com/Evolphin-Software/surfaceX/actions/workflows/ci.yml/badge.svg" alt="CI Status"/></a>
   <img src="https://img.shields.io/badge/Node.js-%3E%3D20-brightgreen?style=flat-square" alt="Node.js"/>
   <img src="https://img.shields.io/badge/pnpm-9.14.2-orange?style=flat-square" alt="pnpm"/>
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"/>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Evolphin-Software/evolphinX/wiki">📚 Documentation</a> •
-  <a href="https://github.com/Evolphin-Software/evolphinX/wiki/Getting-Started">🚀 Getting Started</a> •
-  <a href="https://github.com/Evolphin-Software/evolphinX/wiki/Contributing">🤝 Contributing</a>
+  <a href="https://github.com/Evolphin-Software/surfaceX/wiki">📚 Documentation</a> •
+  <a href="https://github.com/Evolphin-Software/surfaceX/wiki/Getting-Started">🚀 Getting Started</a> •
+  <a href="https://github.com/Evolphin-Software/surfaceX/wiki/Contributing">🤝 Contributing</a>
 </p>
 
 ---
@@ -102,7 +102,7 @@ graph TB
 ## 📁 Project Structure
 
 ```
-evolphinX/
+surfaceX/
 ├── 📁 apps/
 │   ├── 🌐 web/                  # Main Next.js application
 │   │   ├── app/                 # App Router pages
@@ -133,8 +133,8 @@ evolphinX/
 
 ```bash
 # Clone the repository
-git clone https://github.com/Evolphin-Software/evolphinX.git
-cd evolphinX
+git clone https://github.com/Evolphin-Software/surfaceX.git
+cd surfaceX
 
 # Install dependencies
 pnpm install
@@ -209,7 +209,7 @@ export default function Example() {
 }
 ```
 
-See the [Components documentation](https://github.com/Evolphin-Software/evolphinX/wiki/Components) for more details.
+See the [Components documentation](https://github.com/Evolphin-Software/surfaceX/wiki/Components) for more details.
 
 ---
 
@@ -253,23 +253,23 @@ npx turbo link
 
 ## 📚 Documentation
 
-Visit our [Wiki](https://github.com/Evolphin-Software/evolphinX/wiki) for comprehensive documentation:
+Visit our [Wiki](https://github.com/Evolphin-Software/surfaceX/wiki) for comprehensive documentation:
 
-| Page                                                                                          | Description            |
-| --------------------------------------------------------------------------------------------- | ---------------------- |
-| [🏠 Home](https://github.com/Evolphin-Software/evolphinX/wiki)                                | Overview & quick start |
-| [🚀 Getting Started](https://github.com/Evolphin-Software/evolphinX/wiki/Getting-Started)     | Installation guide     |
-| [🏛️ Architecture](https://github.com/Evolphin-Software/evolphinX/wiki/Architecture)           | Project structure      |
-| [🎨 Components](https://github.com/Evolphin-Software/evolphinX/wiki/Components)               | UI library reference   |
-| [🛠️ Development Guide](https://github.com/Evolphin-Software/evolphinX/wiki/Development-Guide) | Best practices         |
-| [🤝 Contributing](https://github.com/Evolphin-Software/evolphinX/wiki/Contributing)           | Contribution guide     |
-| [📡 API Reference](https://github.com/Evolphin-Software/evolphinX/wiki/API-Reference)         | API documentation      |
+| Page                                                                                         | Description            |
+| -------------------------------------------------------------------------------------------- | ---------------------- |
+| [🏠 Home](https://github.com/Evolphin-Software/surfaceX/wiki)                                | Overview & quick start |
+| [🚀 Getting Started](https://github.com/Evolphin-Software/surfaceX/wiki/Getting-Started)     | Installation guide     |
+| [🏛️ Architecture](https://github.com/Evolphin-Software/surfaceX/wiki/Architecture)           | Project structure      |
+| [🎨 Components](https://github.com/Evolphin-Software/surfaceX/wiki/Components)               | UI library reference   |
+| [🛠️ Development Guide](https://github.com/Evolphin-Software/surfaceX/wiki/Development-Guide) | Best practices         |
+| [🤝 Contributing](https://github.com/Evolphin-Software/surfaceX/wiki/Contributing)           | Contribution guide     |
+| [📡 API Reference](https://github.com/Evolphin-Software/surfaceX/wiki/API-Reference)         | API documentation      |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Contributing Guide](https://github.com/Evolphin-Software/evolphinX/wiki/Contributing) before submitting a Pull Request.
+Contributions are welcome! Please read our [Contributing Guide](https://github.com/Evolphin-Software/surfaceX/wiki/Contributing) before submitting a Pull Request.
 
 ---
 
