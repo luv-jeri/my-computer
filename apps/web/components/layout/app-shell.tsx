@@ -95,6 +95,17 @@ export function AppShell({ children }: AppShellProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Fix for hydration mismatch with ResizablePanelGroup
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // or a loading spinner / skeleton matching the layout
+  }
+
   return (
     <>
       <CommandPalette
