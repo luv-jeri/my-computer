@@ -8,7 +8,8 @@
     "./card": "./src/components/card.tsx",
     "./input": "./src/components/input.tsx",
     "./components/*": "./src/components/*.tsx",
-    "./lib/*": "./src/lib/*.ts"
+    "./lib/*": "./src/lib/*.ts",
+    "./hooks/*": "./src/hooks/*.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
