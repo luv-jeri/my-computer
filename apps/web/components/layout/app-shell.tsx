@@ -324,7 +324,9 @@ export function AppShell({ children }: AppShellProps) {
                 </div>
 
                 {/* Scrollable Content */}
-                <div className="flex-1 overflow-scroll">{children}</div>
+                <div className="flex-1 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {children}
+                </div>
               </div>
             </ResizablePanel>
 

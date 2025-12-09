@@ -10,7 +10,15 @@ import {
 import { useRouter } from "next/navigation";
 import { useSearchConversationStore } from "@/lib/stores/search-conversation-store";
 import { mockAssets } from "@/lib/mock-data";
-import { Button } from "@repo/ui";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuCheckboxItem,
+  DropdownMenuTrigger,
+} from "@repo/ui";
 import { cn } from "@repo/ui";
 import {
   Search,
@@ -118,7 +126,7 @@ export function SearchInput({
   const isHero = variant === "hero";
 
   return (
-    <div className={cn("w-full", isHero ? "mx-auto max-w-3xl" : "max-w-xl")}>
+    <div className={cn("w-full", isHero ? "mx-auto max-w-4xl" : "max-w-xl")}>
       <form onSubmit={handleSubmit}>
         {/* Main Search Input */}
         <div
@@ -225,10 +233,10 @@ export function SearchInput({
         <div
           className={cn(
             "flex items-center justify-between gap-4",
-            isHero ? "flex-wrap" : ""
+            isHero ? "no-scrollbar overflow-x-auto" : ""
           )}
         >
-          <div className="bg-muted/30 border-border/40 flex items-center gap-1 self-start rounded-full border p-1 backdrop-blur-sm">
+          <div className="bg-muted/30 border-border/40 flex items-center gap-1 self-start whitespace-nowrap rounded-full border p-1 backdrop-blur-sm">
             <ModeButton
               active={mode === "semantic"}
               onClick={() => handleModeChange("semantic")}
@@ -250,13 +258,36 @@ export function SearchInput({
               label="Exact Match"
             />
             <div className="bg-border/50 mx-1 h-3 w-px" />
-            <ModeButton
-              active={false}
-              onClick={() => {}}
-              icon={SlidersHorizontal}
-              label="Filters"
-              variant="ghost"
-            />
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="text-muted-foreground hover:text-foreground hover:bg-background/50 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200"
+                >
+                  <SlidersHorizontal className="h-3.5 w-3.5 opacity-70" />
+                  <span>Filters</span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuLabel>Filter by Type</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem checked>
+                  Images
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked>
+                  Videos
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked>
+                  Documents
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Date Modified</DropdownMenuLabel>
+                <DropdownMenuCheckboxItem>Today</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>This Week</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>This Month</DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Global Scope Toggle */}
@@ -296,7 +327,7 @@ export function SearchInput({
               variant="ghost"
               size="sm"
               onClick={toggleAutoMode}
-              className="text-muted-foreground text-xs"
+              className="text-muted-foreground flex-shrink-0 whitespace-nowrap text-xs"
             >
               {isAutoMode ? (
                 <>
