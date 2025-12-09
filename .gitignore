@@ -36,3 +36,10 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Agent Tasks (local planning docs)
+.agent-tasks/
+
+# Agent Rules
+.agent/rules/
+
