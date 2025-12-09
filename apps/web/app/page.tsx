@@ -1,158 +1,144 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Input,
-} from "@repo/ui";
+import { AppShell } from "@/components/layout/app-shell";
+import { SearchInput } from "@/components/search/search-input";
+import { Button } from "@repo/ui";
+import { ImageIcon, FileText, Clock, Star } from "lucide-react";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="bg-background min-h-screen">
-      {/* Hero Section */}
-      <header className="border-b">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary h-8 w-8 rounded-lg" />
-            <span className="text-xl font-bold">SurfaceX</span>
+    <AppShell>
+      <div className="relative flex h-[calc(100vh-4rem)] flex-1 flex-col items-center justify-center overflow-hidden p-4 md:p-8">
+        {/* Background Decor (Subtle) */}
+        <div className="via-background to-background absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/5" />
+
+        {/* Main Content Container */}
+        <div className="z-10 flex w-full max-w-3xl flex-col items-center space-y-8">
+          {/* Brand/Logo Area (Minimal - kept empty for focus) */}
+          <div className="animate-in fade-in slide-in-from-bottom-4 mb-4 h-8 opacity-0 duration-700">
+            {/* Optional: <Logo className="h-8 w-auto" /> */}
           </div>
-          <nav className="flex items-center gap-4">
-            <Button variant="ghost">Documentation</Button>
-            <Button variant="ghost">Components</Button>
-            <Button>Get Started</Button>
-          </nav>
-        </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="container py-16">
-        {/* Hero */}
-        <section className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Welcome to <span className="text-primary">SurfaceX</span>
-          </h1>
-          <p className="text-muted-foreground mt-6 text-lg">
-            A modern, scalable monorepo built with Turborepo, Next.js, Tailwind
-            CSS, and shadcn/ui. Production-ready with best practices baked in.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <Button size="lg">Get Started</Button>
-            <Button variant="outline" size="lg">
-              View on GitHub
-            </Button>
+          {/* Hero Search Bar */}
+          <div className="w-full transform transition-all duration-500 hover:scale-[1.01]">
+            <SearchInput variant="hero" autoFocus />
           </div>
-        </section>
 
-        {/* Tech Stack */}
-        <section className="mt-24">
-          <h2 className="text-center text-2xl font-bold">Tech Stack</h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { title: "Next.js 15", desc: "React framework with App Router" },
-              { title: "Turborepo", desc: "High-performance build system" },
-              { title: "Tailwind CSS", desc: "Utility-first CSS framework" },
-              { title: "shadcn/ui", desc: "Beautiful, accessible components" },
-              { title: "TypeScript", desc: "Type-safe development" },
-              { title: "Zustand", desc: "Lightweight state management" },
-              { title: "TanStack Query", desc: "Async state management" },
-              { title: "Vitest", desc: "Fast unit testing" },
-            ].map((item) => (
-              <Card key={item.title}>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">{item.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+          {/* COMPACT DASHBOARD WIDGETS */}
+          <div className="animate-in fade-in slide-in-from-bottom-8 grid w-full grid-cols-1 gap-4 px-2 opacity-0 delay-100 duration-700 md:grid-cols-3">
+            {/* 1. Recent VIews */}
+            <DashboardCard title="Recent Views" icon={Clock}>
+              <div className="space-y-1">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="hover:bg-muted/50 group flex cursor-pointer items-center gap-2 rounded-md p-1.5 transition-colors"
+                  >
+                    <div className="bg-muted text-muted-foreground flex h-6 w-6 items-center justify-center rounded text-[10px] font-medium">
+                      IMG
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="group-hover:text-primary truncate text-[10px] font-medium leading-tight transition-colors">
+                        Project_Alpha_v{i}.png
+                      </p>
+                      <p className="text-muted-foreground text-[9px] leading-tight">
+                        Edited 2h ago
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </DashboardCard>
 
-        {/* Component Demo */}
-        <section className="mt-24">
-          <h2 className="text-center text-2xl font-bold">Component Demo</h2>
-          <div className="mt-8 grid gap-8 lg:grid-cols-2">
-            {/* Buttons Card */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Buttons</CardTitle>
-                <CardDescription>
-                  Various button styles from shadcn/ui
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-4">
-                <Button>Default</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="destructive">Destructive</Button>
-                <Button variant="outline">Outline</Button>
-                <Button variant="ghost">Ghost</Button>
-                <Button variant="link">Link</Button>
-              </CardContent>
-              <CardFooter>
-                <p className="text-muted-foreground text-sm">
-                  Import from @repo/ui
-                </p>
-              </CardFooter>
-            </Card>
+            {/* 2. Favorites */}
+            <DashboardCard title="Favorites" icon={Star}>
+              <div className="grid grid-cols-5 gap-1.5">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+                  <div
+                    key={i}
+                    className="bg-muted/40 hover:bg-primary/10 hover:ring-primary/20 group flex aspect-square cursor-pointer items-center justify-center rounded-md transition-all hover:ring-1"
+                  >
+                    {i < 3 ? (
+                      <div className="h-full w-full rounded-md bg-indigo-500/20" />
+                    ) : (
+                      <Star className="text-muted-foreground/30 group-hover:text-primary/50 h-2.5 w-2.5" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </DashboardCard>
 
-            {/* Form Card */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Form Elements</CardTitle>
-                <CardDescription>
-                  Input components with React Hook Form + Zod
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Email</label>
-                  <Input type="email" placeholder="you@example.com" />
+            {/* 3. Recent Searches / Quick Actions */}
+            <DashboardCard title="Recent Searches" icon={FileText}>
+              <div className="flex h-full flex-col gap-2">
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    "marketing 2024",
+                    "logo assets",
+                    "campaign video",
+                    "q4 report",
+                  ].map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-muted/30 text-muted-foreground hover:bg-muted hover:border-border max-w-[120px] cursor-pointer truncate rounded-md border border-transparent px-1.5 py-0.5 text-[10px] transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Password</label>
-                  <Input type="password" placeholder="••••••••" />
+                <div className="border-border/50 mt-auto flex gap-2 border-t border-dashed pt-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-full justify-start px-2 text-[10px]"
+                  >
+                    <ImageIcon className="mr-1.5 h-3 w-3" /> Upload
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-full justify-start px-2 text-[10px]"
+                  >
+                    <Clock className="mr-1.5 h-3 w-3" /> History
+                  </Button>
                 </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full">Sign In</Button>
-              </CardFooter>
-            </Card>
+              </div>
+            </DashboardCard>
           </div>
-        </section>
-
-        {/* Getting Started */}
-        <section className="mt-24">
-          <Card className="mx-auto max-w-2xl">
-            <CardHeader>
-              <CardTitle>Quick Start</CardTitle>
-              <CardDescription>Get up and running in seconds</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <pre className="bg-muted overflow-x-auto rounded-lg p-4 text-sm">
-                <code>{`# Start the development server
-pnpm dev
-
-# Run tests
-pnpm test
-
-# Build for production
-pnpm build`}</code>
-              </pre>
-            </CardContent>
-          </Card>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="mt-24 border-t py-8">
-        <div className="text-muted-foreground container text-center text-sm">
-          Built with ❤️ using Next.js, Turborepo, and shadcn/ui
         </div>
-      </footer>
+
+        {/* Footer / Status Area (Compact) */}
+        <div className="text-muted-foreground absolute bottom-6 left-0 right-0 flex justify-center text-xs opacity-60">
+          <div className="bg-background/50 border-border/40 flex items-center gap-4 rounded-full border px-4 py-2 shadow-sm backdrop-blur-sm">
+            <span>Ready to search</span>
+            <div className="bg-border h-3 w-px" />
+            <span className="flex items-center gap-1.5">
+              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+              System Online
+            </span>
+          </div>
+        </div>
+      </div>
+    </AppShell>
+  );
+}
+
+function DashboardCard({
+  title,
+  icon: Icon,
+  children,
+}: {
+  title: string;
+  icon: React.ElementType;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="border-border/40 bg-background/40 hover:bg-background/60 flex h-[140px] flex-col rounded-xl border p-3 backdrop-blur-sm transition-colors">
+      <div className="text-muted-foreground mb-2 flex shrink-0 items-center gap-1.5">
+        <Icon className="h-3 w-3" />
+        <span className="text-[10px] font-semibold uppercase tracking-wider">
+          {title}
+        </span>
+      </div>
+      <div className="flex-1 overflow-hidden">{children}</div>
     </div>
   );
 }

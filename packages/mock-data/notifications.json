@@ -1,0 +1,38 @@
+[
+  {
+    "id": "notif-001",
+    "type": "asset_shared",
+    "title": "Sarah Johnson shared 3 files with you",
+    "message": "Product Launch Hero Image.jpg and 2 other files",
+    "timestamp": "2024-12-09T10:30:00Z",
+    "read": false,
+    "actionUrl": "/assets?shared=true"
+  },
+  {
+    "id": "notif-002",
+    "type": "comment",
+    "title": "New comment on Q4 Financial Report",
+    "message": "Michael Chen: 'Please review the updated projections'",
+    "timestamp": "2024-12-09T09:15:00Z",
+    "read": false,
+    "actionUrl": "/asset/asset-002"
+  },
+  {
+    "id": "notif-003",
+    "type": "version",
+    "title": "New version uploaded",
+    "message": "Emma Davis uploaded version 2.0 of Brand Guidelines Video",
+    "timestamp": "2024-12-08T16:45:00Z",
+    "read": true,
+    "actionUrl": "/asset/asset-003"
+  },
+  {
+    "id": "notif-004",
+    "type": "system",
+    "title": "Storage limit approaching",
+    "message": "You've used 85% of your storage quota",
+    "timestamp": "2024-12-08T08:00:00Z",
+    "read": true,
+    "actionUrl": "/settings/storage"
+  }
+]
