@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "my-computer-portal",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -17,7 +17,6 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@repo/core": "workspace:*",
-    "@repo/mock-data": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "^5.62.2",
     "@tanstack/react-query-devtools": "^5.62.2",

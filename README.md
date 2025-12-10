@@ -100,7 +100,7 @@ graph TB
 ```
 myComputer/
 ├── 📁 apps/
-│   └── 🌐 web/                  # Main Next.js application
+│   └── 🌐 my-computer-portal/   # Main Next.js application
 │       ├── app/                 # App Router pages
 │       ├── components/          # App-specific components
 │       ├── lib/                 # Utilities
@@ -141,8 +141,8 @@ pnpm install
 # Start all apps in development mode
 pnpm dev
 
-# Start only the web app
-pnpm dev --filter web
+# Start only the portal app
+pnpm dev --filter my-computer-portal
 ```
 
 🌐 **Web App**: [http://localhost:3000](http://localhost:3000)
@@ -208,7 +208,7 @@ export default function Example() {
 Use the shadcn CLI to add new components:
 
 ```bash
-cd apps/web
+cd apps/my-computer-portal
 pnpm dlx shadcn@latest add [COMPONENT]
 
 # Examples:
@@ -248,7 +248,7 @@ git commit -m "feat(ui): add new Checkbox component"
 
 1. Push to GitHub
 2. Import project to [Vercel](https://vercel.com)
-3. Set root directory to `apps/web`
+3. Set root directory to `apps/my-computer-portal`
 4. Deploy! 🎉
 
 ### Enable Remote Caching
