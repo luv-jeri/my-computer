@@ -17,6 +17,8 @@ import {
   LogOut,
   Compass,
   PanelRight,
+  Archive,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@repo/ui";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -35,6 +37,10 @@ import { AISearchAssistant } from "../ai/AISearchAssistant";
 import { AssetPropertiesModal } from "../modals/AssetPropertiesModal";
 import { DynamicBreadcrumbs } from "@/components/dynamic-breadcrumbs";
 import { AdvancedSearchBar } from "@/components/advanced-search-bar";
+import { DownloadModal } from "@/components/modals/download-modal";
+import { ShareModal } from "@/components/modals/share-modal";
+import { RestoreModal } from "@/components/modals/restore-modal";
+import { PricingBanner } from "@/components/pricing-banner";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -152,6 +158,28 @@ export function AppShell({ children }: AppShellProps) {
                 className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs font-medium"
               >
                 <Link href="/explore">Explore</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs font-medium"
+              >
+                <Link href="/timeline-search">
+                  <Sparkles className="mr-1 h-3 w-3" />
+                  AI Timeline
+                </Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs font-medium"
+              >
+                <Link href="/archive">
+                  <Archive className="mr-1 h-3 w-3" />
+                  Archive
+                </Link>
               </Button>
             </nav>
 
@@ -399,6 +427,11 @@ export function AppShell({ children }: AppShellProps) {
 
         {/* Asset Properties Modal */}
         <AssetPropertiesModal />
+
+        {/* Download, Share, and Restore Modals */}
+        <DownloadModal />
+        <ShareModal />
+        <RestoreModal />
 
         {/* Status Bar */}
         <div className="bg-muted/20 text-muted-foreground flex h-6 select-none items-center justify-between border-t px-3 text-[10px]">

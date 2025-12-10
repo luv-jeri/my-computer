@@ -102,6 +102,10 @@ export interface SearchFilters {
     min?: number;
     max?: number;
   };
+  // New filter fields for CTO features
+  archiveStatus?: string[];
+  storageTier?: string[];
+  aiContent?: string[];
 }
 
 /**
@@ -220,4 +224,254 @@ export interface FileSystemNode {
   assetId?: string;
   parentId?: string;
   expanded?: boolean;
+}
+
+// ============================================================================
+// Video Timeline Types - AI Data Timeline Search
+// ============================================================================
+
+/**
+ * Types of AI detection in video timelines
+ */
+export type TimelineDetectionType =
+  | "object"
+  | "face"
+  | "scene"
+  | "text"
+  | "speech"
+  | "celebrity"
+  | "label"
+  | "action";
+
+/**
+ * A segment within a video timeline containing AI detections
+ */
+export interface TimelineSegment {
+  id: string;
+  startTime: number; // in seconds
+  endTime: number; // in seconds
+  type: TimelineDetectionType;
+  label: string;
+  confidence: number; // 0-100
+  source: "aws-rekognition" | "rev-ai" | "custom";
+  metadata?: Record<string, string>;
+}
+
+/**
+ * A complete timeline for a video asset
+ */
+export interface VideoTimeline {
+  id: string;
+  assetId: string;
+  name: string;
+  segments: TimelineSegment[];
+  createdAt: string;
+  source: "aws-rekognition" | "rev-ai" | "custom";
+}
+
+/**
+ * Match result when searching across timelines
+ */
+export interface TimelineMatch {
+  timeline: VideoTimeline;
+  matchedSegments: TimelineSegment[];
+  overlapsWith?: VideoTimeline[]; // Other timelines with overlapping matches
+}
+
+/**
+ * Transcript segment from Rev.ai or similar
+ */
+export interface TranscriptSegment {
+  id: string;
+  startTime: number;
+  endTime: number;
+  text: string;
+  speaker?: string;
+  confidence: number;
+}
+
+// ============================================================================
+// Archive & Restore Types
+// ============================================================================
+
+/**
+ * Storage tier for archived assets
+ */
+export type StorageTier =
+  | "standard"
+  | "infrequent-access"
+  | "glacier"
+  | "glacier-deep-archive";
+
+/**
+ * Archive status for an asset
+ */
+export interface ArchiveStatus {
+  isArchived: boolean;
+  tier: StorageTier;
+  archivedAt?: string;
+  restoreExpiry?: string; // When restored, when does it expire
+  autoArchiveDate?: string; // When it will be auto-archived
+}
+
+/**
+ * Restore task status
+ */
+export type RestoreTaskStatus =
+  | "pending"
+  | "in-progress"
+  | "completed"
+  | "failed"
+  | "cancelled";
+
+/**
+ * A restore task for archived assets
+ */
+export interface RestoreTask {
+  id: string;
+  assetId: string;
+  assetTitle: string;
+  status: RestoreTaskStatus;
+  progress: number; // 0-100
+  estimatedTimeMinutes: number;
+  startedAt: string;
+  completedAt?: string;
+  error?: string;
+  tier: StorageTier;
+}
+
+/**
+ * Archive rule for automated archiving
+ */
+export interface ArchiveRule {
+  id: string;
+  name: string;
+  criteria: {
+    olderThanDays?: number;
+    unusedForDays?: number;
+    tags?: string[];
+    projects?: string[];
+  };
+  targetTier: StorageTier;
+  isActive: boolean;
+}
+
+// ============================================================================
+// Download & Sharing Types
+// ============================================================================
+
+/**
+ * Download quality/resolution options
+ */
+export type DownloadQuality = "original" | "high" | "medium" | "low" | "proxy";
+
+/**
+ * Download request
+ */
+export interface DownloadRequest {
+  id: string;
+  assetIds: string[];
+  quality: DownloadQuality;
+  status: "preparing" | "ready" | "downloading" | "completed" | "failed";
+  progress: number;
+  downloadUrl?: string;
+  expiresAt?: string;
+  createdAt: string;
+}
+
+/**
+ * Permission level for sharing
+ */
+export type SharePermission = "view" | "download" | "edit";
+
+/**
+ * A share link for assets or collections
+ */
+export interface ShareLink {
+  id: string;
+  url: string;
+  assetIds?: string[];
+  collectionId?: string;
+  permission: SharePermission;
+  expiresAt?: string;
+  password?: boolean;
+  createdAt: string;
+  createdBy: User;
+  accessCount: number;
+  lastAccessedAt?: string;
+}
+
+/**
+ * External collaborator invited via email
+ */
+export interface ExternalCollaborator {
+  id: string;
+  email: string;
+  permission: SharePermission;
+  invitedAt: string;
+  acceptedAt?: string;
+  expiresAt?: string;
+}
+
+// ============================================================================
+// Integration Types
+// ============================================================================
+
+/**
+ * Integration connection status
+ */
+export type IntegrationStatus =
+  | "connected"
+  | "disconnected"
+  | "error"
+  | "pending";
+
+/**
+ * AWS Recognition integration config
+ */
+export interface AWSRecognitionConfig {
+  isEnabled: boolean;
+  status: IntegrationStatus;
+  region: string;
+  features: {
+    objectDetection: boolean;
+    faceDetection: boolean;
+    celebrityRecognition: boolean;
+    textDetection: boolean;
+    contentModeration: boolean;
+  };
+  lastSyncAt?: string;
+}
+
+/**
+ * Rev.ai integration config
+ */
+export interface RevAIConfig {
+  isEnabled: boolean;
+  status: IntegrationStatus;
+  language: string;
+  features: {
+    transcription: boolean;
+    speakerDiarization: boolean;
+    punctuation: boolean;
+  };
+  lastSyncAt?: string;
+}
+
+// ============================================================================
+// Usage & Pricing Types
+// ============================================================================
+
+/**
+ * User's current usage stats
+ */
+export interface UsageStats {
+  timelinesUsed: number;
+  timelinesLimit: number;
+  hoursProcessed: number;
+  hoursLimit: number;
+  storageUsedGB: number;
+  storageLimitGB: number;
+  planType: "free" | "pro" | "enterprise";
+  trialEndsAt?: string;
 }

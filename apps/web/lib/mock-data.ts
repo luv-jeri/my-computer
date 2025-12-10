@@ -625,6 +625,35 @@ export const mockFilterFacets: FilterFacet[] = [
       { value: "urban-arch", label: "Urban Architecture", count: 2 },
     ],
   },
+  {
+    name: "Archive Status",
+    key: "archiveStatus",
+    options: [
+      { value: "available", label: "Available", count: 17 },
+      { value: "archived", label: "Archived", count: 4 },
+      { value: "restoring", label: "Restoring", count: 1 },
+    ],
+  },
+  {
+    name: "Storage Tier",
+    key: "storageTier",
+    options: [
+      { value: "standard", label: "Standard Storage", count: 17 },
+      { value: "glacier", label: "Glacier", count: 2 },
+      { value: "glacier-deep-archive", label: "Deep Archive", count: 1 },
+      { value: "infrequent-access", label: "Infrequent Access", count: 1 },
+    ],
+  },
+  {
+    name: "AI Content",
+    key: "aiContent",
+    options: [
+      { value: "hasTimeline", label: "Has AI Timeline", count: 2 },
+      { value: "hasTranscript", label: "Has Transcript", count: 2 },
+      { value: "hasFaceDetection", label: "Face Detection", count: 1 },
+      { value: "hasObjectDetection", label: "Object Detection", count: 2 },
+    ],
+  },
 ];
 
 // ============================================================================
@@ -982,3 +1011,484 @@ export const mockFileSystem: FileSystemNode[] = [
     children: [],
   },
 ];
+
+// ============================================================================
+// Video Timeline Mock Data
+// ============================================================================
+
+import type {
+  VideoTimeline,
+  TimelineSegment,
+  TranscriptSegment,
+  ArchiveStatus,
+  RestoreTask,
+  ArchiveRule,
+  ShareLink,
+  DownloadRequest,
+  AWSRecognitionConfig,
+  RevAIConfig,
+  UsageStats,
+} from "./types";
+
+// Timeline segments for the drone footage video (asset-10)
+const droneFootageSegments: TimelineSegment[] = [
+  {
+    id: "seg-1",
+    startTime: 0,
+    endTime: 5,
+    type: "scene",
+    label: "City Skyline - Wide Shot",
+    confidence: 95,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-2",
+    startTime: 5,
+    endTime: 12,
+    type: "object",
+    label: "Skyscrapers",
+    confidence: 92,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-3",
+    startTime: 8,
+    endTime: 15,
+    type: "label",
+    label: "Urban Architecture",
+    confidence: 88,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-4",
+    startTime: 15,
+    endTime: 22,
+    type: "scene",
+    label: "Sunset over Downtown",
+    confidence: 91,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-5",
+    startTime: 22,
+    endTime: 30,
+    type: "object",
+    label: "Traffic Flow",
+    confidence: 85,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-6",
+    startTime: 30,
+    endTime: 38,
+    type: "action",
+    label: "Camera Pan Right",
+    confidence: 90,
+    source: "custom",
+  },
+  {
+    id: "seg-7",
+    startTime: 38,
+    endTime: 45,
+    type: "text",
+    label: "Building Signage Detected",
+    confidence: 78,
+    source: "aws-rekognition",
+    metadata: { text: "CHICAGO" },
+  },
+];
+
+// Timeline segments for product unboxing video (asset-11)
+const productUnboxingSegments: TimelineSegment[] = [
+  {
+    id: "seg-ub-1",
+    startTime: 0,
+    endTime: 8,
+    type: "scene",
+    label: "Package on Table",
+    confidence: 94,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-ub-2",
+    startTime: 8,
+    endTime: 20,
+    type: "action",
+    label: "Opening Box",
+    confidence: 89,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-ub-3",
+    startTime: 20,
+    endTime: 35,
+    type: "object",
+    label: "Product Reveal",
+    confidence: 96,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-ub-4",
+    startTime: 35,
+    endTime: 50,
+    type: "object",
+    label: "Hands Holding Product",
+    confidence: 92,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-ub-5",
+    startTime: 50,
+    endTime: 70,
+    type: "scene",
+    label: "Close-up Product Details",
+    confidence: 90,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-ub-6",
+    startTime: 70,
+    endTime: 90,
+    type: "action",
+    label: "Product in Use",
+    confidence: 85,
+    source: "aws-rekognition",
+  },
+  {
+    id: "seg-ub-7",
+    startTime: 90,
+    endTime: 120,
+    type: "scene",
+    label: "Final Product Shot",
+    confidence: 93,
+    source: "aws-rekognition",
+  },
+];
+
+export const mockVideoTimelines: VideoTimeline[] = [
+  {
+    id: "timeline-1",
+    assetId: "asset-10",
+    name: "AWS Rekognition Analysis",
+    segments: droneFootageSegments,
+    createdAt: "2024-11-13T12:00:00Z",
+    source: "aws-rekognition",
+  },
+  {
+    id: "timeline-2",
+    assetId: "asset-11",
+    name: "AWS Rekognition Analysis",
+    segments: productUnboxingSegments,
+    createdAt: "2024-11-03T16:00:00Z",
+    source: "aws-rekognition",
+  },
+];
+
+// Mock transcript for drone footage
+export const mockTranscripts: Record<string, TranscriptSegment[]> = {
+  "asset-10": [
+    {
+      id: "trans-1",
+      startTime: 0,
+      endTime: 5,
+      text: "Welcome to Chicago, the Windy City.",
+      speaker: "Narrator",
+      confidence: 95,
+    },
+    {
+      id: "trans-2",
+      startTime: 5,
+      endTime: 12,
+      text: "Home to iconic architecture and stunning skyline views.",
+      speaker: "Narrator",
+      confidence: 93,
+    },
+    {
+      id: "trans-3",
+      startTime: 15,
+      endTime: 22,
+      text: "As the sun sets over downtown, the city truly comes alive.",
+      speaker: "Narrator",
+      confidence: 91,
+    },
+    {
+      id: "trans-4",
+      startTime: 30,
+      endTime: 38,
+      text: "From the Willis Tower to the John Hancock Center.",
+      speaker: "Narrator",
+      confidence: 89,
+    },
+  ],
+  "asset-11": [
+    {
+      id: "trans-ub-1",
+      startTime: 0,
+      endTime: 8,
+      text: "Hey everyone, today we're unboxing the latest product.",
+      speaker: "Host",
+      confidence: 96,
+    },
+    {
+      id: "trans-ub-2",
+      startTime: 20,
+      endTime: 35,
+      text: "And here it is! Look at that beautiful design.",
+      speaker: "Host",
+      confidence: 94,
+    },
+    {
+      id: "trans-ub-3",
+      startTime: 50,
+      endTime: 70,
+      text: "The attention to detail is incredible.",
+      speaker: "Host",
+      confidence: 92,
+    },
+  ],
+};
+
+// ============================================================================
+// Archive & Restore Mock Data
+// ============================================================================
+
+export const mockArchiveStatus: Record<string, ArchiveStatus> = {
+  "asset-1": {
+    isArchived: false,
+    tier: "standard",
+  },
+  "asset-2": {
+    isArchived: false,
+    tier: "standard",
+  },
+  "asset-3": {
+    isArchived: true,
+    tier: "glacier",
+    archivedAt: "2024-10-01T00:00:00Z",
+  },
+  "asset-8": {
+    isArchived: true,
+    tier: "glacier-deep-archive",
+    archivedAt: "2024-08-15T00:00:00Z",
+  },
+  "asset-9": {
+    isArchived: true,
+    tier: "infrequent-access",
+    archivedAt: "2024-11-01T00:00:00Z",
+    restoreExpiry: "2024-12-15T00:00:00Z",
+  },
+  "asset-14": {
+    isArchived: false,
+    tier: "standard",
+    autoArchiveDate: "2025-02-14T00:00:00Z",
+  },
+};
+
+export const mockRestoreTasks: RestoreTask[] = [
+  {
+    id: "restore-1",
+    assetId: "asset-3",
+    assetTitle: "Autumn Forest Path",
+    status: "in-progress",
+    progress: 45,
+    estimatedTimeMinutes: 180,
+    startedAt: "2024-12-10T08:00:00Z",
+    tier: "glacier",
+  },
+  {
+    id: "restore-2",
+    assetId: "asset-8",
+    assetTitle: "Modern Glass Building",
+    status: "pending",
+    progress: 0,
+    estimatedTimeMinutes: 720,
+    startedAt: "2024-12-10T10:30:00Z",
+    tier: "glacier-deep-archive",
+  },
+  {
+    id: "restore-3",
+    assetId: "asset-17",
+    assetTitle: "Desert Landscape",
+    status: "completed",
+    progress: 100,
+    estimatedTimeMinutes: 60,
+    startedAt: "2024-12-09T14:00:00Z",
+    completedAt: "2024-12-09T15:00:00Z",
+    tier: "infrequent-access",
+  },
+  {
+    id: "restore-4",
+    assetId: "asset-20",
+    assetTitle: "Abstract Geometric Art",
+    status: "failed",
+    progress: 25,
+    estimatedTimeMinutes: 120,
+    startedAt: "2024-12-08T09:00:00Z",
+    tier: "glacier",
+    error: "Temporary network issue. Click retry to resume.",
+  },
+];
+
+export const mockArchiveRules: ArchiveRule[] = [
+  {
+    id: "rule-1",
+    name: "Auto-archive old assets",
+    criteria: {
+      olderThanDays: 365,
+      unusedForDays: 180,
+    },
+    targetTier: "glacier",
+    isActive: true,
+  },
+  {
+    id: "rule-2",
+    name: "Archive completed project files",
+    criteria: {
+      projects: ["Nature Collection 2023", "Urban Architecture 2023"],
+    },
+    targetTier: "glacier-deep-archive",
+    isActive: true,
+  },
+  {
+    id: "rule-3",
+    name: "Move large videos to infrequent access",
+    criteria: {
+      unusedForDays: 30,
+      tags: ["video", "raw-footage"],
+    },
+    targetTier: "infrequent-access",
+    isActive: false,
+  },
+];
+
+// ============================================================================
+// Download & Share Mock Data
+// ============================================================================
+
+export const mockDownloadRequests: DownloadRequest[] = [
+  {
+    id: "dl-1",
+    assetIds: ["asset-1", "asset-2", "asset-3"],
+    quality: "original",
+    status: "ready",
+    progress: 100,
+    downloadUrl: "https://example.com/downloads/batch-001.zip",
+    expiresAt: "2024-12-11T00:00:00Z",
+    createdAt: "2024-12-10T09:00:00Z",
+  },
+  {
+    id: "dl-2",
+    assetIds: ["asset-10"],
+    quality: "high",
+    status: "preparing",
+    progress: 65,
+    createdAt: "2024-12-10T10:00:00Z",
+  },
+];
+
+export const mockShareLinks: ShareLink[] = [
+  {
+    id: "share-1",
+    url: "https://surfacex.io/s/abc123",
+    assetIds: ["asset-1", "asset-2"],
+    permission: "view",
+    expiresAt: "2024-12-20T00:00:00Z",
+    password: false,
+    createdAt: "2024-12-05T10:00:00Z",
+    createdBy: mockUsers[0]!,
+    accessCount: 15,
+    lastAccessedAt: "2024-12-10T08:30:00Z",
+  },
+  {
+    id: "share-2",
+    url: "https://surfacex.io/s/xyz789",
+    collectionId: "collection-1",
+    permission: "download",
+    expiresAt: "2024-12-31T00:00:00Z",
+    password: true,
+    createdAt: "2024-12-01T14:00:00Z",
+    createdBy: mockUsers[1]!,
+    accessCount: 8,
+    lastAccessedAt: "2024-12-09T16:45:00Z",
+  },
+  {
+    id: "share-3",
+    url: "https://surfacex.io/s/def456",
+    assetIds: ["asset-10", "asset-11"],
+    permission: "download",
+    password: false,
+    createdAt: "2024-12-08T09:00:00Z",
+    createdBy: mockUsers[0]!,
+    accessCount: 3,
+  },
+];
+
+// ============================================================================
+// Integration Mock Data
+// ============================================================================
+
+export const mockAWSConfig: AWSRecognitionConfig = {
+  isEnabled: true,
+  status: "connected",
+  region: "us-east-1",
+  features: {
+    objectDetection: true,
+    faceDetection: true,
+    celebrityRecognition: false,
+    textDetection: true,
+    contentModeration: true,
+  },
+  lastSyncAt: "2024-12-10T06:00:00Z",
+};
+
+export const mockRevAIConfig: RevAIConfig = {
+  isEnabled: true,
+  status: "connected",
+  language: "en",
+  features: {
+    transcription: true,
+    speakerDiarization: true,
+    punctuation: true,
+  },
+  lastSyncAt: "2024-12-10T06:00:00Z",
+};
+
+// ============================================================================
+// Usage & Pricing Mock Data
+// ============================================================================
+
+export const mockUsageStats: UsageStats = {
+  timelinesUsed: 2,
+  timelinesLimit: 4,
+  hoursProcessed: 12.5,
+  hoursLimit: 100,
+  storageUsedGB: 45.2,
+  storageLimitGB: 100,
+  planType: "free",
+  trialEndsAt: "2025-01-10T00:00:00Z",
+};
+
+// ============================================================================
+// Helper function to get archive status for an asset
+// ============================================================================
+
+export function getAssetArchiveStatus(assetId: string): ArchiveStatus {
+  return (
+    mockArchiveStatus[assetId] || {
+      isArchived: false,
+      tier: "standard" as const,
+    }
+  );
+}
+
+// Helper to get timeline for a video asset
+export function getVideoTimeline(assetId: string): VideoTimeline | undefined {
+  return mockVideoTimelines.find((t) => t.assetId === assetId);
+}
+
+// Helper to get transcript for a video asset
+export function getVideoTranscript(
+  assetId: string
+): TranscriptSegment[] | undefined {
+  return mockTranscripts[assetId];
+}

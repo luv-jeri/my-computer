@@ -33,6 +33,7 @@ import {
   PanelRight,
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { generateAIResponse } from "@/lib/ai-response-generator";
 
 const MODEL_PRESETS = [
   { id: "fast", label: "Fast", icon: Zap, desc: "Quick, concise answers" },
@@ -89,35 +90,27 @@ export function AISearchAssistant({
   const handleSend = () => {
     if (!input.trim() && pendingAttachments.length === 0) return;
 
+    const userQuery = input;
     addUserMessage(input);
     setInput("");
 
-    // Simulate AI response based on preset
+    // Generate intelligent AI response based on query content
     setTimeout(() => {
-      let response = "I'm processing your request...";
-      if (modelPreset === "fast")
-        response = "Here's a quick summary of what I found.";
-      if (modelPreset === "reasoning")
-        response =
-          "Let me break this down step by step for you.\n\n1. Analyzing request...\n2. Checking constraints...\n\nHere is the optimal solution.";
-      if (modelPreset === "research")
-        response =
-          "I've analyzed multiple sources. The consensus indicates that...";
-
-      addAssistantMessage(response, {
-        suggestions: ["Add filters", "Change view", "Export results"],
+      const aiResponse = generateAIResponse(userQuery);
+      addAssistantMessage(aiResponse.content, {
+        suggestions: aiResponse.suggestions,
       });
-    }, 1000);
+    }, 800);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
     addUserMessage(suggestion);
     setTimeout(() => {
-      addAssistantMessage(
-        `Applied filter: "${suggestion}". Showing updated results.`,
-        { suggestions: [] }
-      );
-    }, 500);
+      const aiResponse = generateAIResponse(suggestion);
+      addAssistantMessage(aiResponse.content, {
+        suggestions: aiResponse.suggestions,
+      });
+    }, 600);
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {

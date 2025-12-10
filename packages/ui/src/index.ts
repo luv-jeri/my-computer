@@ -21,6 +21,10 @@ export * from "./components/resizable";
 export * from "./components/context-menu";
 export * from "./components/menubar";
 export * from "./components/breadcrumb";
+export * from "./components/radio-group";
+export * from "./components/switch";
+export * from "./components/progress";
+export * from "./components/slider";
 
 // Utilities
 export { cn } from "./lib/utils";

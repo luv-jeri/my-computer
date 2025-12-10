@@ -14,13 +14,23 @@ import {
   Tag,
   Eye,
   Info,
+  Archive,
+  Sparkles,
+  Clock,
 } from "lucide-react";
 import type { Asset } from "@/lib/types";
-import { formatDate, formatDuration, formatFileSize } from "@/lib/mock-data";
+import {
+  formatDate,
+  formatDuration,
+  formatFileSize,
+  getAssetArchiveStatus,
+  mockVideoTimelines,
+} from "@/lib/mock-data";
 import { useAssetPropertiesStore } from "@/lib/stores/asset-properties-store";
 import { QuickLookDialog } from "@/components/quick-look-dialog";
 import { AssetContextMenu } from "@/components/asset-context-menu";
 import { Button } from "@repo/ui";
+import Link from "next/link";
 
 interface AssetCardProps {
   asset: Asset;
@@ -54,6 +64,10 @@ export function AssetCard({
   const TypeIcon = typeIcons[asset.type];
   const { openProperties } = useAssetPropertiesStore();
   const [quickLookOpen, setQuickLookOpen] = useState(false);
+
+  // Get archive and timeline info
+  const archiveStatus = getAssetArchiveStatus(asset.id);
+  const hasTimeline = mockVideoTimelines.some((t) => t.assetId === asset.id);
 
   const handleCardClick = () => {
     // Regular click opens properties modal
@@ -114,6 +128,55 @@ export function AssetCard({
                 {formatDuration(asset.duration)}
               </div>
             )}
+
+            {/* Archive status badge */}
+            {archiveStatus.isArchived && (
+              <div className="absolute left-2 top-2">
+                <div
+                  className={cn(
+                    "flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
+                    archiveStatus.tier === "glacier-deep-archive"
+                      ? "bg-purple-500 text-white"
+                      : archiveStatus.tier === "glacier"
+                        ? "bg-blue-500 text-white"
+                        : "bg-amber-500 text-white"
+                  )}
+                >
+                  <Archive className="h-3 w-3" />
+                  {archiveStatus.tier === "glacier-deep-archive"
+                    ? "Deep"
+                    : archiveStatus.tier === "glacier"
+                      ? "Glacier"
+                      : "Archived"}
+                </div>
+              </div>
+            )}
+
+            {/* Restoring indicator (shown when asset has restoreExpiry) */}
+            {archiveStatus.restoreExpiry && (
+              <div className="absolute left-2 top-2">
+                <div className="flex items-center gap-1 rounded-full bg-green-500 px-2 py-0.5 text-xs font-medium text-white">
+                  <Clock className="h-3 w-3" />
+                  Restored
+                </div>
+              </div>
+            )}
+
+            {/* Timeline indicator for videos */}
+            {hasTimeline &&
+              asset.type === "video" &&
+              !archiveStatus.isArchived && (
+                <Link
+                  href={`/timeline-search?asset=${asset.id}`}
+                  className="absolute left-2 top-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex items-center gap-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-2 py-0.5 text-xs font-medium text-white shadow-lg transition-transform hover:scale-105">
+                    <Sparkles className="h-3 w-3" />
+                    AI Timeline
+                  </div>
+                </Link>
+              )}
 
             {/* Hover Actions Overlay */}
             <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
