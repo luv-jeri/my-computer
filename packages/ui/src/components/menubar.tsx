@@ -8,7 +8,7 @@ import { cn } from "../lib/utils";
 
 const Menubar = MenubarPrimitive.Root;
 
-const MenubarMenu = MenubarPrimitive.Menu;
+const MenubarMenu: typeof MenubarPrimitive.Menu = MenubarPrimitive.Menu;
 
 const MenubarGroup = MenubarPrimitive.Group;
 
