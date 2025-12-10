@@ -264,8 +264,8 @@ npx turbo link
 
 Visit our [Wiki](https://github.com/luv-jeri/my-computer/wiki) for comprehensive documentation:
 
-| Page                                                                                         | Description            |
-| -------------------------------------------------------------------------------------------- | ---------------------- |
+| Page                                                                                   | Description            |
+| -------------------------------------------------------------------------------------- | ---------------------- |
 | [🏠 Home](https://github.com/luv-jeri/my-computer/wiki)                                | Overview & quick start |
 | [🚀 Getting Started](https://github.com/luv-jeri/my-computer/wiki/Getting-Started)     | Installation guide     |
 | [🏛️ Architecture](https://github.com/luv-jeri/my-computer/wiki/Architecture)           | Project structure      |
