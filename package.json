@@ -1,5 +1,5 @@
 {
-  "name": "surfacex",
+  "name": "mycomputer",
   "private": true,
   "scripts": {
     "build": "turbo run build",

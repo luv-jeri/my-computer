@@ -1389,7 +1389,7 @@ export const mockDownloadRequests: DownloadRequest[] = [
 export const mockShareLinks: ShareLink[] = [
   {
     id: "share-1",
-    url: "https://surfacex.io/s/abc123",
+    url: "https://mycomputer.io/s/abc123",
     assetIds: ["asset-1", "asset-2"],
     permission: "view",
     expiresAt: "2024-12-20T00:00:00Z",
@@ -1401,7 +1401,7 @@ export const mockShareLinks: ShareLink[] = [
   },
   {
     id: "share-2",
-    url: "https://surfacex.io/s/xyz789",
+    url: "https://mycomputer.io/s/xyz789",
     collectionId: "collection-1",
     permission: "download",
     expiresAt: "2024-12-31T00:00:00Z",
@@ -1413,7 +1413,7 @@ export const mockShareLinks: ShareLink[] = [
   },
   {
     id: "share-3",
-    url: "https://surfacex.io/s/def456",
+    url: "https://mycomputer.io/s/def456",
     assetIds: ["asset-10", "asset-11"],
     permission: "download",
     password: false,

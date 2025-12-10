@@ -60,7 +60,7 @@ export function AssetContextMenu({
   };
 
   const handleCopyLink = async () => {
-    const link = `https://surfacex.io/assets/${asset.id}`;
+    const link = `https://mycomputer.io/assets/${asset.id}`;
     await navigator.clipboard.writeText(link);
     toast({
       title: "Link copied",

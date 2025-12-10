@@ -43,7 +43,7 @@ export function Header({ onMenuClick }: HeaderProps) {
               <div className="border-background absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 bg-amber-400" />
             </div>
             <span className="hidden text-lg font-semibold tracking-tight sm:inline-block">
-              SurfaceX
+              myComputer
             </span>
           </Link>
 

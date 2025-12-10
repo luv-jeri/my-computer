@@ -57,7 +57,7 @@ export const useShareStore = create<ShareStore>((set, get) => ({
 
     const newLink: ShareLink = {
       id: `share-${Date.now()}`,
-      url: `https://surfacex.io/s/${Math.random().toString(36).substring(2, 8)}`,
+      url: `https://mycomputer.io/s/${Math.random().toString(36).substring(2, 8)}`,
       assetIds: selectedAssetIds.length > 0 ? selectedAssetIds : undefined,
       collectionId: selectedCollectionId || undefined,
       permission,

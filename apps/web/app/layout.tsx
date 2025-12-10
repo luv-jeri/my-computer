@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SurfaceX",
-  description: "SurfaceX - Modern Web Application",
+  title: "myComputer",
+  description: "myComputer - Modern Web Application",
 };
 
 export default function RootLayout({

@@ -66,7 +66,7 @@ export const useDownloadStore = create<DownloadStore>((set, get) => ({
                   ...r,
                   status: "ready" as const,
                   progress: 100,
-                  downloadUrl: `https://surfacex.io/downloads/${newRequest.id}.zip`,
+                  downloadUrl: `https://mycomputer.io/downloads/${newRequest.id}.zip`,
                   expiresAt: new Date(
                     Date.now() + 24 * 60 * 60 * 1000
                   ).toISOString(),

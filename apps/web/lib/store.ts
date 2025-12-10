@@ -28,7 +28,7 @@ export const useAppStore = create<AppState>()(
         setTheme: (theme) => set({ theme }),
       }),
       {
-        name: "surfaceX-storage",
+        name: "myComputer-storage",
         partialize: (state) => ({ theme: state.theme }), // Only persist theme
       }
     ),
