@@ -19,7 +19,6 @@ import {
 import Image from "next/image";
 import { useDownloadStore } from "@/lib/stores/download-store";
 import { useShareStore } from "@/lib/stores/share-store";
-import { useToast } from "@/hooks/use-toast";
 
 const collections = [
   {
@@ -61,7 +60,6 @@ const collections = [
 ];
 
 export default function CollectionsPage() {
-  const { toast } = useToast();
   const { openDownloadModal } = useDownloadStore();
   const { openShareModal } = useShareStore();
 

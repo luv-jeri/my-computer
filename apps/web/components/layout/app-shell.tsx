@@ -40,7 +40,6 @@ import { AdvancedSearchBar } from "@/components/advanced-search-bar";
 import { DownloadModal } from "@/components/modals/download-modal";
 import { ShareModal } from "@/components/modals/share-modal";
 import { RestoreModal } from "@/components/modals/restore-modal";
-import { PricingBanner } from "@/components/pricing-banner";
 
 interface AppShellProps {
   children: React.ReactNode;

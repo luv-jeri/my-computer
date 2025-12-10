@@ -1,6 +1,6 @@
 "use client";
 
-import { Archive, Clock, HardDrive, RefreshCw, Settings2 } from "lucide-react";
+import { Archive, HardDrive, RefreshCw, Settings2 } from "lucide-react";
 import { AppShell } from "@/components/layout/app-shell";
 import {
   Card,
@@ -10,7 +10,6 @@ import {
   CardTitle,
   Badge,
   Button,
-  Progress,
   Tabs,
   TabsContent,
   TabsList,

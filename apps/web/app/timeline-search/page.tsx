@@ -5,9 +5,6 @@ import { AppShell } from "@/components/layout/app-shell";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
   Button,
   Input,
   Badge,
@@ -16,21 +13,11 @@ import {
   TabsList,
   TabsTrigger,
 } from "@repo/ui";
-import {
-  Search,
-  Sparkles,
-  Film,
-  Clock,
-  Layers,
-  ChevronRight,
-  Play,
-} from "lucide-react";
+import { Search, Sparkles, Film, Layers, Play } from "lucide-react";
 import { VideoPlayer } from "@/components/video/video-player";
 import { TimelineMetadataPanel } from "@/components/video/timeline-metadata-panel";
 import {
   mockAssets,
-  mockVideoTimelines,
-  mockTranscripts,
   getVideoTimeline,
   getVideoTranscript,
 } from "@/lib/mock-data";
