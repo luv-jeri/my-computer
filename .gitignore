@@ -40,6 +40,4 @@ yarn-error.log*
 # Agent Tasks (local planning docs)
 .agent-tasks/
 
-# Agent Rules
-.agent/rules/
 
